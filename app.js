@@ -15,6 +15,12 @@ function createTask(){
     displayTasks();
 }
 
+function clearTasks(){
+    tasks = [];
+    saveTasksToLocalStorage();
+    displayTasks();
+}
+
 function displayTasks(){
     const tasksContainer = document.getElementById("tasks-container");
     tasksContainer.innerHTML = "";
@@ -55,6 +61,9 @@ function saveTasksToLocalStorage(){
 
 
 const createTaskButton = document.getElementById("create-task-button");
+const clearTasksButton = document.getElementById("clear-tasks-button");
+
 createTaskButton.addEventListener("click", createTask);
+clearTasksButton.addEventListener("click", clearTasks)
 
 displayTasks();
