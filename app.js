@@ -10,6 +10,7 @@ function createTask(){
     if (taskDescription.length > 0) {
         const newTask = new Task(taskDescription, false);
         tasks.push(newTask);
+        saveTasksToLocalStorage();
     }
     displayTasks();
 }
@@ -17,17 +18,16 @@ function createTask(){
 function displayTasks(){
     const tasksContainer = document.getElementById("tasks-container");
     tasksContainer.innerHTML = "";
+
+    const tasksJSON = localStorage.getItem("tasks");
+    tasks = tasksJSON ? JSON.parse(tasksJSON) : [];
+
     tasks.forEach((task, index) => {
         const taskElement = document.createElement("div");
         taskElement.classList.add("task");
 
         const taskDesc = document.createElement("span");
         taskDesc.textContent = task.description;
-
-        // taskDesc.addEventListener("dblclick", () => {
-        //     enterEditMode(taskDesc);
-        // });
-
         taskElement.appendChild(taskDesc);
 
         const deleteButton = document.createElement("button");
@@ -42,45 +42,17 @@ function displayTasks(){
     });
 }
 
-// function enterEditMode(element) {
-//     const text = element.textContent;
-//     const input = document.createElement("input");
-//     input.value = text;
-  
-//     const finishEdit = () => {
-//         const newText = input.value;
-//         element.textContent = newText;
-//         element.removeEventListener("blur", finishEdit);
-//         element.addEventListener("dblclick", () => {
-//         enterEditMode(element);
-//         });
-//     };
-  
-//     input.addEventListener("blur", finishEdit);
-  
-//     element.textContent = "";
-//     element.appendChild(input);
-  
-//     input.focus();
-//     input.setSelectionRange(0, input.value.length);
-  
-//     element.removeEventListener("dblclick", handleDoubleClick);
-// }
-  
-//     function handleDoubleClick() {
-//         enterEditMode(this);
-// }
-  
-//     const taskElements = document.querySelectorAll(".task");
-//     taskElements.forEach((taskElement) => {
-//         taskElement.addEventListener("dblclick", handleDoubleClick);
-// });
-  
-
 function deleteTask(index){
     tasks.splice(index, 1);
+    saveTasksToLocalStorage();
     displayTasks();
 }
+
+function saveTasksToLocalStorage(){
+    const tasksJSON = JSON.stringify(tasks);
+    localStorage.setItem("tasks", tasksJSON);
+}
+
 
 const createTaskButton = document.getElementById("create-task-button");
 createTaskButton.addEventListener("click", createTask);
