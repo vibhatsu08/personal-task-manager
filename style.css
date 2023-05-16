@@ -12,10 +12,17 @@
     --create-task-button-background-color: #262626;
     --create-task-button-text-color: #E2E8CE;
 
-    --tasks-container-background-color: #ACBFA4;
+    --clear-all-tasks-button-background-color: #485696;
+    --clear-all-tasks-button-text-color: #E7E7E7;
 
+    --tasks-container-background-color: #ACBFA4;
+    
     --task-background-color: #262626;
     --task-text-color: #E2E8CE;
+
+    --task-tag-background-color: #F0F4EF;
+    --task-tag-text-color: #0D1821;
+
 
     --delete-task-background-color: #FF8112;
     --delete-task-text-color: #262626;
@@ -33,30 +40,43 @@ body {
     align-items: flex-start; 
 }
 
+#buttons {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    width: 100%;
+    gap: 1rem;
+}
+
+.buttons {
+    border-style: none;
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-radius: 1.1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+#create-task-button {
+    background-color: var(--create-task-button-background-color);
+    color: var(--create-task-button-text-color);
+}
+
+#clear-tasks-button {
+    background-color: var(--clear-all-tasks-button-background-color);
+    color: var(--clear-all-tasks-button-text-color);
+}
+
 #tasks {
     background-color: var(--tasks-background-color);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     padding: 2rem;
     background-color: var(--tasks-container-background-color);
-    width: fit-content;
+    width: 70vw;
     height: 100vh;
-}
-
-
-#create-task-button {
-    background-color: var(--create-task-button-background-color);
-    color: var(--create-task-button-text-color);
-    border-style: none;
-    font-size: 2rem;
-    width: 40vw;
-    padding: 1rem;
-    border-radius: 1.2rem;
-    cursor: pointer;
-    text-transform: uppercase;
 }
 
 #tasks-container {
@@ -68,15 +88,19 @@ body {
     width: 100%;
 }
 
+.task-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
 .task {
     background-color: var(--task-background-color);
     color: var(--task-text-color);
     font-size: 1.3rem;
     width: 100%;
     padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 .task:first-child {
     border-top-left-radius: 1.2rem;
@@ -86,6 +110,20 @@ body {
 .task:last-child {
     border-bottom-left-radius: 1.2rem;
     border-bottom-right-radius: 1.2rem;
+}
+
+.task-tag {
+    background-color: var(--task-tag-background-color);
+    color: var(--task-tag-text-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.3rem;
+}
+
+.task-tags-content {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 1em;
 }
 
 .delete-task {
